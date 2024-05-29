@@ -1,0 +1,525 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href={% static 'Autoescuela/estilos/css/custom.css'%}>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+
+    <title>Autoescuela</title>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-sm bg-body-tertiary">
+    <div class="container-fluid"> 
+      <a href="{% url 'index' %}">
+        <img src="{% static 'Autoescuela/img/logo-autoescuela-2_1.png' %}" width="100px">
+    </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'cursos'%}">Cursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'FAQS' %}">FAQ's</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profesores' %}">Profesores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'miscompras' %}">Mis Compras</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'perfil' %}">Perfil</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Iniciar Sesión
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'inicioSesionEstud' %}">Estudiante</a></li>
+              
+              <li><a class="dropdown-item" href="{% url 'perfilAdmin' %}">Administracion</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex flex-row me-1">
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="{% url 'interfaz_de_compra' %}"><i class="bi bi-cart"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- NAV -->
+
+
+  <section class="d-flex justify-content-start">
+    <div class="container m-2">
+        <a href="{% url 'perfilAdmin' %}" class="btn boton-volver"><i class="bi bi-arrow-left"></i></a>
+    </div>
+</section>
+
+
+
+
+  <div class="container mt-3 contenedor-principal">
+    <h2>Usuarios Registrados</h2>
+    <p>Datos de usuarios registrados:</p>            
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Cursos</th>
+          <th>Numero</th>
+          <th>ID</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dimebag</td>
+          <td>Darrel</td>
+          <td>dimebag@example.com</td>
+          <td>Clase B</td>
+          <td>+56966666666</td>
+          <td>10</td>
+          <td class="button-container">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" onclick="confirmarEliminar(10)">
+              <i class="bi bi-trash"></i>
+          </button>
+          <button type="button" class="btn btn-warning" onclick="confirmarBloquear(10)">
+            <i class="bi bi-ban"></i>
+        </button>
+        </td>
+        </tr>
+        <tr>
+          <td>Marty</td>
+          <td>Friedman</td>
+          <td>marty@example.com</td>
+          <td>Clase A3</td>
+          <td>+56999999999</td>
+          <td>20</td>
+          <td class="button-container">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" onclick="confirmarEliminar(20)">
+              <i class="bi bi-trash"></i>
+          </button>
+          <button type="button" class="btn btn-warning" onclick="confirmarBloquear(20)">
+            <i class="bi bi-ban"></i>
+        </button>
+        </td>
+        </tr>
+        <tr>
+          <td>Steve</td>
+          <td>Vai</td>
+          <td>god@example.com</td>
+          <td>Clase A2</td>
+          <td>+56988888888</td>
+          <td>30</td>
+          <td class="button-container">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" onclick="confirmarEliminar(30)">
+              <i class="bi bi-trash"></i>
+          </button>
+          
+          <button type="button" class="btn btn-warning" onclick="confirmarBloquear(30)">
+            <i class="bi bi-ban"></i>
+        </button>
+        </td>
+        </tr>
+        <tr>
+          <td>Stevie</td>
+          <td>Ray Vayghan</td>
+          <td>RealGod@example.com</td>
+          <td>Clase A2, Clase B</td>
+          <td>+56977777777</td>
+          <td>40</td>
+          <td class="button-container">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" onclick="confirmarEliminar(40)">
+              <i class="bi bi-trash"></i>
+          </button>
+          <button type="button" class="btn btn-warning" onclick="confirmarBloquear(40)">
+            <i class="bi bi-ban"></i>
+        </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarUsuarioModal">
+      Agregar Usuarios
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#usuariosEliminadosModal">
+      Usuarios Eliminados
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#usuariosBloqueadosModal">
+      Usuarios Bloqueados
+    </button>
+  </div>
+  
+<!-- Modal para Agregar Usuario -->
+<div class="modal fade" id="agregarUsuarioModal" tabindex="-1" aria-labelledby="agregarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="agregarUsuarioModalLabel">Agregar Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Formulario para agregar usuario -->
+              <form id="agregarUsuarioModal">
+                  <div class="mb-3">
+                      <label for="ID" class="form-label">ID</label>
+                      <input type="number" class="form-control" id="ID" name="ID">
+                  </div>
+                  <div class="mb-3">
+                      <label for="NombreA" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="NombreA" name="NombreA">
+                  </div>
+                  <div class="mb-3">
+                      <label for="ApellidoA" class="form-label">Apellido</label>
+                      <input type="text" class="form-control" id="ApellidoA" name="ApellidoA">
+                  </div>
+                  <div class="mb-3">
+                      <label for="Email" class="form-label">Email</label>
+                      <input type="text" class="form-control" id="Email" name="Email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="tipoCurso" class="form-label">Tipo de Curso</label>
+                    <select class="form-select" id="tipoCurso" name="tipoCurso">
+                        <option value="1">Curso B</option>
+                        <option value="2">Curso A2</option>
+                        <option value="3">Curso A3</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                  <label for="numero" class="form-label">Número Teléfono</label>
+                  <input type="number" class="form-control" id="Numero" name="Numero">
+              </div>
+
+                  <!-- Boton de guardar -->
+                  <button type="submit" class="btn btn-primary" aria-labelledby="#agregarUsuarioModalLabel">Confirmar</button>
+                </form>              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal para Editar Usuario -->
+<div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Formulario para agregar usuario -->
+              <form id="editarUsuarioModal">
+                  <div class="mb-3">
+                      <label for="ID" class="form-label">ID</label>
+                      <input type="number" class="form-control" id="ID" name="ID">
+                  </div>
+                  <div class="mb-3">
+                      <label for="NombreB" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="NombreB" name="NombreB">
+                  </div>
+                  <div class="mb-3">
+                      <label for="ApellidoB" class="form-label">Apellido</label>
+                      <input type="text" class="form-control" id="ApellidoB" name="ApellidoB">
+                  </div>
+                  <div class="mb-3">
+                      <label for="Email" class="form-label">Email</label>
+                      <input type="text" class="form-control" id="Email" name="Email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="tipoCurso" class="form-label">Tipo de Curso</label>
+                    <select class="form-select" id="tipoCurso" name="tipoCurso">
+                        <option value="1">Curso B</option>
+                        <option value="2">Curso A2</option>
+                        <option value="3">Curso A3</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                  <label for="numero" class="form-label">Número Teléfono</label>
+                  <input type="number" class="form-control" id="Numero" name="Numero">
+              </div>
+
+                  <!-- Boton de guardar -->
+                  <button type="submit" class="btn btn-primary" aria-labelledby="#agregarUsuarioModalLabel">Confirmar</button>
+                </form>              </form>
+          </div>
+      </div>
+  </div>
+</div>
+ <!-- Modal de Confirmación de Eliminación -->
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="confirmarEliminarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmarEliminarModalLabel">Confirmar Eliminación</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              ¿Estás seguro de que deseas eliminar este usuario?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Sí</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Modal para confirmar bloqueo -->
+<div class="modal fade" id="confirmarBloquearModal" tabindex="-1" aria-labelledby="confirmarBloquearModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmarBloquearModalLabel">Confirmar Bloqueo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              ¿Estás seguro de que deseas bloquear este usuario?
+          </div>
+          <div class="modal-footer">
+              <!-- Botón para cancelar el bloqueo -->
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <!-- Botón para confirmar el bloqueo -->
+              <button type="button" id="confirmarBloquearBtn" class="btn btn-danger">Sí</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Modal de usuarios eliminados -->
+<div class="modal fade" id="usuariosEliminadosModal" tabindex="-1" aria-labelledby="usuariosEliminadosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="usuariosEliminadosModalLabel">Usuarios Eliminados</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Tabla de usuarios eliminados -->
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Fecha</th>
+                          <!-- Agrega más columnas según los datos que quieras mostrar -->
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <!-- Aquí puedes generar dinámicamente las filas de la tabla con los datos de los usuarios eliminados -->
+                      <tr>
+                          <td>1</td>
+                          <td>Juan</td>
+                          <td>Pérez</td>
+                          <td>14/05/2017</td>
+                          <!-- Agrega más celdas según los datos que quieras mostrar -->
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Pepe</td>
+                        <td>Grillo</td>
+                        <td>01/01/1991</td>
+                      </tr>
+                      <!-- Agrega más filas según sea necesario -->
+                  </tbody>
+              </table>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Modal de usuarios bloqueados -->
+<div class="modal fade" id="usuariosBloqueadosModal" tabindex="-1" aria-labelledby="usuariosBloqueadosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="usuariosBloqueadosModalLabel">Usuarios bloqueados</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Tabla de usuarios bloqueados -->
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Fecha</th>
+                          <!-- Agrega más columnas según los datos que quieras mostrar -->
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <!-- Aquí puedes generar dinámicamente las filas de la tabla con los datos de los usuarios eliminados -->
+                      <tr>
+                          <td>99</td>
+                          <td>Dave</td>
+                          <td>Mustaine</td>
+                          <td>18/08/1969</td>
+                          <!-- Agrega más celdas según los datos que quieras mostrar -->
+                      </tr>
+                      <!-- Agrega más filas según sea necesario -->
+                  </tbody>
+              </table>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Conecta con nosotros en nuestras redes sociales:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Autoescuela
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer content. Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Autoescuela
+            </h6>
+            <p>
+              <a href="{% url 'cursos' %}" class="text-reset">Cursos</a>
+            </p>
+            <p>
+              <a href="{% url 'FAQS' %}" class="text-reset">FAQ´s</a>
+            </p>
+            <p>
+              <a href="{% url 'profesores' %}" class="text-reset">Profesores</a>
+            </p>
+            <p>
+              <a href="{% url 'contacto' %}"class="text-reset">Contacto</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Usuario
+            </h6>
+            <p>
+              <a href="{% url 'perfil' %}" class="text-reset">Perfil</a>
+            </p>
+            <p>
+              <a href="{% url 'miscompras' %}" class="text-reset">Mis Compras</a>
+            </p>
+            <p>
+              <a href="{% url 'inicioSesionEstud' %}" class="text-reset">Iniciar Sesión</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+            <p><i class="fas fa-home me-3"></i>Los nogales #335</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              escuelachillan@gmail.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i>22 2256368</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2024 Copyright:
+      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Autoescuela.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+  
+</body>
+<script src="{% static 'Autoescuela/estilos/js/custom.js' %}">
+</html>
